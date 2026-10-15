@@ -146,6 +146,9 @@ int main(int argc, char** argv) {
         return 1;
     }
 
+    GLint mousePositionLocation =
+        glGetUniformLocation(program, "mousePosition");
+
     // First we define our geometry, which is a 2D rectangle in this case.
     // The rectangle will be centered around the window and will cover half the width and height of the window.
     // Each vertex will have a different color
@@ -266,6 +269,15 @@ int main(int argc, char** argv) {
 
         // Use the program we created earlier.
         glUseProgram(program);
+
+        double mouseX, mouseY;
+        glfwGetCursorPos(window, &mouseX, &mouseY);
+
+        float ndcX = (float)(2.0 * mouseX / WINDOW_W - 1.0);
+        float ndcY = (float)(1.0 - 2.0 * mouseY / WINDOW_H);
+
+        glUniform2f(mousePositionLocation, ndcX, ndcY);
+
         // Bind the VAO.
         glBindVertexArray(vao);
         // Draw a rectange. We need to specify the mode (GL_TRIANGLES), the number of vertices (6), the type of each element (Unsigned Short) and where in the EBO to start reading the elements (0).

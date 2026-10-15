@@ -5,6 +5,8 @@
 layout(location = 0) in vec3 position;
 layout(location = 1) in vec4 color;
 
+uniform vec2 mousePosition;
+
 // This variable "color" is of a type called "Varyings". Varyings will be passed from the vertex shader to the fragment shader.
 // We are collecting all the varyings (currently, the color only) into what is called "Interface Block" for the sake of organization.
 out Varyings { // Note: the name "Varying" this line is something we decided. We can use any name as long as the fragmenr shader uses the same name for this block.
@@ -15,13 +17,12 @@ void main() {
     // The vertex shader currently does two things only:
     // 1. pass the position attribute to the builtin output variable "gl_Position" after adding the homogenous component to it.
     // We will learn more about the homogenous component later, but for now, we will just need to let it be 1.
-
-    //here we are adding the mouse position to the vertex position, so that the shape will follow the mouse.
     gl_Position = vec4(
         position.x + mousePosition.x,
         position.y + mousePosition.y,
         position.z,
         1.0
+    );
     // 2. pass the color attribute to the color varying.
     vs_out.color = color;
 }
