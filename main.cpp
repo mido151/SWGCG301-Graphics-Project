@@ -6,6 +6,7 @@
 #include <GLFW/glfw3.h>
 
 #include "Shapes/TriangleShape.h"
+#include "Shapes/HexagonShape.h"
 
 
 
@@ -194,6 +195,10 @@ int main(int argc, char** argv) {
             triangle.init();
 
             triangle.draw(ndcX, ndcY);
+
+            HexagonShape hexagon(program);
+            hexagon.init();
+            hexagon.draw(ndcX, ndcY);
         }
 		//removed to be in individual files
 
