@@ -253,6 +253,12 @@ int main(int argc, char** argv) {
     while (!glfwWindowShouldClose(window)) {
         glfwPollEvents();
 
+		// If the escape key is pressed, we set the window to close. # mohamed made this
+        if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+        {
+            glfwSetWindowShouldClose(window, true);
+        }
+
         // First, we set the clear color (Note that this function doesn't actually clear anything).
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         // Then we clear the color buffer. We need to specify GL_COLOR_BUFFER_BIT because there are other buffers that we can clear. More on that later.
