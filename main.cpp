@@ -166,19 +166,6 @@ int main(int argc, char** argv) {
             glfwSetWindowShouldClose(window, true);
         }
 
-        // First, we set the clear color (Note that this function doesn't actually clear anything).
-        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-        // Then we clear the color buffer. We need to specify GL_COLOR_BUFFER_BIT because there are other buffers that we can clear. More on that later.
-        glClear(GL_COLOR_BUFFER_BIT);
-
-        // Use the program we created earlier.
-        glUseProgram(program);
-
-
-
-        TriangleShape triangle(program);
-        triangle.init();
-		//removed to be in individual files
 
         double mouseX, mouseY;
         glfwGetCursorPos(window, &mouseX, &mouseY);
@@ -191,8 +178,23 @@ int main(int argc, char** argv) {
             1.0 - 2.0 * mouseY / WINDOW_H
             );
 
-        triangle.draw(ndcX, ndcY);
+        // First, we set the clear color (Note that this function doesn't actually clear anything).
+        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+        // Then we clear the color buffer. We need to specify GL_COLOR_BUFFER_BIT because there are other buffers that we can clear. More on that later.
+        glClear(GL_COLOR_BUFFER_BIT);
 
+        // Use the program we created earlier.
+        glUseProgram(program);
+
+
+        if (glfwGetKey(window, GLFW_KEY_T) == GLFW_PRESS)
+        {
+
+            TriangleShape triangle(program);
+            triangle.init();
+
+            triangle.draw(ndcX, ndcY);
+        }
 		//removed to be in individual files
 
         // Finally, we swap the front and back buffers. This is what makes the triangle that we drew on the back buffer appear on the screen (the front buffer).
