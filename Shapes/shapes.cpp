@@ -72,3 +72,27 @@ void Shape::setupGeometry(
     // Unbind the VAO to prevent accidental modification
     glBindVertexArray(0);
 }
+
+
+void Shape::draw(float mouseX, float mouseY) {
+    glUseProgram(shaderProgram);
+
+    if (mousePositionLocation != -1) {
+        glUniform2f(
+            mousePositionLocation,
+            mouseX,
+            mouseY
+        );
+    }
+
+    glBindVertexArray(vao);
+
+    glDrawElements(
+        GL_TRIANGLES,
+        indexCount,
+        GL_UNSIGNED_SHORT,
+        nullptr
+    );
+
+    glBindVertexArray(0);
+}

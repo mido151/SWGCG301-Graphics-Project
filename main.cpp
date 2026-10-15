@@ -5,6 +5,10 @@
 #include <glad/gl.h>
 #include <GLFW/glfw3.h>
 
+#include "Shapes/TriangleShape.h"
+
+
+
 // Load a shader from a file
 // file_path: the path to the shader code
 // shader_type: the type of shader to compile (either GL_VERTEX_SHADER or GL_FRAGMENT_SHADER)
@@ -169,8 +173,22 @@ int main(int argc, char** argv) {
 
         // Use the program we created earlier.
         glUseProgram(program);
-
+        TriangleShape triangle(program);
+        triangle.init();
 		//removed to be in individual files
+
+        double mouseX, mouseY;
+        glfwGetCursorPos(window, &mouseX, &mouseY);
+
+        float ndcX = static_cast<float>(
+            2.0 * mouseX / WINDOW_W - 1.0
+            );
+
+        float ndcY = static_cast<float>(
+            1.0 - 2.0 * mouseY / WINDOW_H
+            );
+
+        triangle.draw(ndcX, ndcY);
 
 		//removed to be in individual files
 
