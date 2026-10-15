@@ -107,8 +107,8 @@ struct Vertex {
 };
 
 // The window dimensions
-#define WINDOW_W 640
-#define WINDOW_H 480
+#define WINDOW_W 1920
+#define WINDOW_H 1080
 
 int main(int argc, char** argv) {
     if(!glfwInit()) {
