@@ -173,6 +173,9 @@ int main(int argc, char** argv) {
 
         // Use the program we created earlier.
         glUseProgram(program);
+
+
+
         TriangleShape triangle(program);
         triangle.init();
 		//removed to be in individual files
