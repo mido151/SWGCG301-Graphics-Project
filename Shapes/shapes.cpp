@@ -1,8 +1,11 @@
 
 #include "shapes.h"
+#include <cstddef>
 
 Shape::Shape(GLuint shaderProgram)
     : shaderProgram(shaderProgram) {
+    mousePositionLocation =
+        glGetUniformLocation(shaderProgram, "mousePosition");
 }
 
 Shape::~Shape() {
