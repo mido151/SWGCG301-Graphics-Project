@@ -15,7 +15,13 @@ void main() {
     // The vertex shader currently does two things only:
     // 1. pass the position attribute to the builtin output variable "gl_Position" after adding the homogenous component to it.
     // We will learn more about the homogenous component later, but for now, we will just need to let it be 1.
-    gl_Position = vec4(position, 1.0);
+
+    //here we are adding the mouse position to the vertex position, so that the shape will follow the mouse.
+    gl_Position = vec4(
+        position.x + mousePosition.x,
+        position.y + mousePosition.y,
+        position.z,
+        1.0
     // 2. pass the color attribute to the color varying.
     vs_out.color = color;
 }
