@@ -140,8 +140,7 @@ int main(int argc, char** argv) {
     if(!program) {
         return 1;
     }
-	SmilyFace smiley(program);
-    smiley.init();
+
 
 
 	//removed to be in individual files
@@ -230,6 +229,8 @@ int main(int argc, char** argv) {
 		
 		if (glfwGetKey(window, GLFW_KEY_F) == GLFW_PRESS)
 		{
+            SmilyFace smiley(program);
+            smiley.init();
     		smiley.draw(ndcX, ndcY);
 		}
 
