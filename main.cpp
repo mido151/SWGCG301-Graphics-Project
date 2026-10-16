@@ -236,13 +236,12 @@ int main(int argc, char** argv) {
 
 
 
-		//removed to be in individual files
 
         // Finally, we swap the front and back buffers. This is what makes the triangle that we drew on the back buffer appear on the screen (the front buffer).
         glfwSwapBuffers(window);
     }
 
-	//removed to be in individual files
+
     glDeleteProgram(program);
 
     glfwDestroyWindow(window);
