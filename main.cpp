@@ -8,6 +8,7 @@
 #include "Shapes/TriangleShape.h"
 #include "Shapes/HexagonShape.h"
 #include "Shapes/StarShape.h"
+#include "Shapes/HeartShape.h"
 
 
 
@@ -213,6 +214,14 @@ int main(int argc, char** argv) {
 			StarShape star(program);
             star.init();
 			star.draw(ndcX, ndcY);
+
+        }
+
+        if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+        {
+			HeartShape heart(program);
+			heart.init();
+			heart.draw(ndcX, ndcY);
 
         }
 

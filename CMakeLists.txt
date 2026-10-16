@@ -15,7 +15,7 @@ add_subdirectory(vendor/glfw EXCLUDE_FROM_ALL)
 
 # This creates a new exectuble called "lab1" (e.g., on windows, it will be called "lab1.exe")
 # The executable is created by compiling the following c/c++ files and linking so libraries (which we will define later)
-add_executable(SWGCG301-Graphics-Project main.cpp vendor/glad/src/gl.c "Shapes/shapes.h" "Shapes/shapes.cpp" "Shapes/TriangleShape.h" "Shapes/TriangleShape.cpp" "Shapes/StarShape.h" "Shapes/StarShape.cpp" "Shapes/HexagonShape.cpp" "Shapes/HexagonShape.h" )
+add_executable(SWGCG301-Graphics-Project main.cpp vendor/glad/src/gl.c "Shapes/shapes.h" "Shapes/shapes.cpp" "Shapes/TriangleShape.h" "Shapes/TriangleShape.cpp" "Shapes/StarShape.h" "Shapes/StarShape.cpp" "Shapes/HexagonShape.cpp" "Shapes/HexagonShape.h"  "Shapes/HeartShape.h" "Shapes/HeartShape.cpp")
 # This tells the compiler where to find the header files for GLFW and glad.
 target_include_directories(SWGCG301-Graphics-Project PRIVATE 
    vendor/glfw/include
