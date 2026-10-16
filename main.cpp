@@ -7,6 +7,7 @@
 
 #include "Shapes/TriangleShape.h"
 #include "Shapes/HexagonShape.h"
+#include "Shapes/StarShape.h"
 
 
 
@@ -196,10 +197,27 @@ int main(int argc, char** argv) {
 
             triangle.draw(ndcX, ndcY);
 
+        }
+
+        if (glfwGetKey(window, GLFW_KEY_H) == GLFW_PRESS)
+        {
+
             HexagonShape hexagon(program);
             hexagon.init();
             hexagon.draw(ndcX, ndcY);
+
         }
+
+        if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+        {
+			StarShape star(program);
+            star.init();
+			star.draw(ndcX, ndcY);
+
+        }
+
+
+
 		//removed to be in individual files
 
         // Finally, we swap the front and back buffers. This is what makes the triangle that we drew on the back buffer appear on the screen (the front buffer).
