@@ -9,6 +9,7 @@
 #include "Shapes/HexagonShape.h"
 #include "Shapes/StarShape.h"
 #include "Shapes/HeartShape.h"
+#include "Shapes/SmilyFace.h"
 
 
 
@@ -139,6 +140,8 @@ int main(int argc, char** argv) {
     if(!program) {
         return 1;
     }
+	SmilyFace smiley(program);
+    smiley.init();
 
 
 	//removed to be in individual files
@@ -224,6 +227,11 @@ int main(int argc, char** argv) {
 			heart.draw(ndcX, ndcY);
 
         }
+		
+		if (glfwGetKey(window, GLFW_KEY_F) == GLFW_PRESS)
+		{
+    		smiley.draw(ndcX, ndcY);
+		}
 
 
 
