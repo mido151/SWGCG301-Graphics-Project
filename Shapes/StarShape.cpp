@@ -1,35 +1,31 @@
 #include "StarShape.h"
-
-#include <array>
 #include <cmath>
 
 StarShape::StarShape(GLuint shaderProgram)
     : Shape(shaderProgram) {
-}
+    constexpr int POINTS = 5;
+    constexpr int OUTLINE_VERTICES = POINTS * 2;   // alternating outer tips and inner corners
+    constexpr float OUTER_RADIUS = 0.5f;
+    constexpr float INNER_RADIUS = OUTER_RADIUS * 0.4f;
 
-void StarShape::init() {
-    constexpr float pi = 3.14159265358979323846f;
-    constexpr float outerRadius = 0.5f;
-    constexpr float innerRadius = outerRadius * 0.4f;
-
-    std::array<Vertex, 11> vertices{};
-    for (int i = 0; i < 10; ++i) {
-        const float angle = pi / 2.0f + static_cast<float>(i) * pi / 5.0f;
-        const float radius = (i % 2 == 0) ? outerRadius : innerRadius;
-        vertices[i] = {
-            {radius * std::cos(angle), radius * std::sin(angle), 0.0f},
-            {255, 210, 0, 255}
-        };
+    // The outline vertices go first (indices 0..9), the center vertex is last (index 10).
+    std::vector<Vertex> vertices;
+    for (int i = 0; i < OUTLINE_VERTICES; ++i) {
+        // Start at 90 degrees so one tip points straight up.
+        const float angle = PI / 2.0f + static_cast<float>(i) * PI / POINTS;
+        const float radius = (i % 2 == 0) ? OUTER_RADIUS : INNER_RADIUS;
+        vertices.push_back({{radius * std::cos(angle), radius * std::sin(angle), 0.0f}, {255, 210, 0, 255}});
     }
-    vertices[10] = {{0.0f, 0.0f, 0.0f}, {255, 255, 255, 255}};
+    vertices.push_back({{0.0f, 0.0f, 0.0f}, {255, 255, 255, 255}});
+    const uint16_t center = OUTLINE_VERTICES;
 
-    std::array<uint16_t, 30> indices{};
-    for (uint16_t i = 0; i < 10; ++i) {
-        const uint16_t triangle = static_cast<uint16_t>(i * 3);
-        indices[triangle] = 10;
-        indices[triangle + 1] = i;
-        indices[triangle + 2] = static_cast<uint16_t>((i + 1) % 10);
+    // One triangle per outline edge: center, vertex i, next vertex.
+    std::vector<uint16_t> indices;
+    for (uint16_t i = 0; i < OUTLINE_VERTICES; ++i) {
+        indices.push_back(center);
+        indices.push_back(i);
+        indices.push_back(static_cast<uint16_t>((i + 1) % OUTLINE_VERTICES));
     }
 
-    setupGeometry(vertices.data(), vertices.size(), indices.data(), indices.size());
+    setupGeometry(vertices, indices);
 }

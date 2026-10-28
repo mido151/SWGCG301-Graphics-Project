@@ -7,7 +7,10 @@
 layout(location = 0) in vec3 position;
 layout(location = 1) in vec4 color;
 
+// Where to move the shape (normalized device coordinates); the shape follows the mouse.
 uniform vec2 mousePosition;
+// Window width / height. Dividing x by it keeps the shapes' proportions when the window isn't square.
+uniform float aspectRatio;
 
 // This variable "color" is of a type called "Varyings". Varyings will be passed from the vertex shader to the fragment shader.
 // We are collecting all the varyings (currently, the color only) into what is called "Interface Block" for the sake of organization.
@@ -26,7 +29,7 @@ void main() {
 
 
     gl_Position = vec4(
-        position.x + mousePosition.x,
+        position.x / aspectRatio + mousePosition.x,
         position.y + mousePosition.y,
         position.z,
         1.0
