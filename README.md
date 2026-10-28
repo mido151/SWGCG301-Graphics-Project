@@ -20,26 +20,29 @@ The course project is split into three phases. This README tracks what is done a
 - Passes per-vertex color from the vertex shader to the fragment shader through an interface block, so colors are interpolated across each triangle.
 - Draws five different shapes, each in its own class derived from a shared `Shape` base class that owns the VAO, VBO and EBO:
   triangle, hexagon, star, heart and smiley face.
-- Each shape follows the mouse cursor (the cursor position is converted to normalized device coordinates).
+- Each shape is created once before the main loop and follows the mouse cursor (the cursor position is converted to normalized device coordinates using the real window size).
+- Shapes keep their proportions when the window is resized: the vertex shader divides x by the aspect ratio.
+- Vsync is enabled.
 
 ### Controls
 
 | Input | Action |
 |---|---|
-| `T` | Triangle |
-| `H` | Hexagon |
-| `S` | Star |
-| `W` | Heart |
-| `F` | Smiley face |
+| `1` | Triangle |
+| `2` | Hexagon |
+| `3` | Star |
+| `4` | Heart |
+| `5` | Smiley face |
 | Mouse | The shape follows the cursor |
 | `Esc` | Quit |
 
-A shape is drawn while its key is held down.
+The selected shape stays on screen until another number key is pressed.
 
 ## Project structure
 
 ```
-main.cpp          window, shader loading, main loop, input handling
+main.cpp          window, main loop, input handling
+ShaderLoader.*    loads, compiles and links a shader program from files
 Shapes/           Shape base class and one class per shape
 shaders/          main.vert / main.frag (GLSL 330 core)
 vendor/           GLFW and GLAD
